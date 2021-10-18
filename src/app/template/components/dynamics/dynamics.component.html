@@ -1,0 +1,108 @@
+<h2>Template: <small>Dynamics</small></h2>
+<hr>
+
+<form #myForm="ngForm" (ngSubmit)="save(myForm)" autocomplete="off">
+
+  <div class="row mb-3">
+    <label class="col-sm-3 col-form-label">Nombre</label>
+    <div class="col-sm-9">
+      <div class="input-group">
+        <input
+          #name="ngModel"
+          type="text"
+          class="form-control"
+          placeholder="Nombre del usuario"
+          name="name"
+          [(ngModel)]="user.name"
+          required
+          minlength="4"
+        >
+        <i style="color: green;font-size: 1.25rem;" class="bi bi-check-circle input-group-text" *ngIf="name.valid"></i>
+      </div>
+      <span class="form-text text-danger" *ngIf="name.getError('required') && name.touched">
+        El nombre es requerido
+      </span>
+      <span class="form-text text-danger" *ngIf="name.getError('minlength')">
+        Use mas de 3 caracteres
+      </span>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label class="col-sm-3 col-form-label">Age</label>
+    <div class="col-sm-9">
+      <div class="input-group">
+        <input
+          #age="ngModel"
+          type="number"
+          class="form-control"
+          placeholder="Edad del usuario"
+          name="age"
+          [(ngModel)]="user.age"
+          required
+          min="1"
+        >
+        <i style="color: green;font-size: 1.25rem;" class="bi bi-check-circle input-group-text" *ngIf="age.valid"></i>
+      </div>
+      <span class="form-text text-danger" *ngIf="age.getError('required') && age.touched">
+        La edad es requerido
+      </span>
+      <span class="form-text text-danger" *ngIf="age.getError('min') && age.touched">
+        La edad debe ser > 0
+      </span>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label class="col-sm-3 col-form-label">Agregar</label>
+    <div class="col-sm-9">
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Agregar favorito"
+          name="favorite"
+          [(ngModel)]="favorite"
+          (keyup.enter)="addFav()"
+        >
+        <button
+          type="button"
+          class="btn btn-outline-primary input-group-text"
+          (click)="addFav()"
+        >
+          <i style="font-size: 1.25rem;" class="bi bi-plus-circle"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3" *ngIf="user.favorites.length">
+    <label class="col-sm-3 col-form-label">Juegos favoritos</label>
+    <div class="col-sm-9">
+      <div class="input-group mb-1" *ngFor="let fav of user.favorites; let i = index">
+        <input
+          type="text"
+          class="form-control"
+          name="fav{{ i }}"
+          [(ngModel)]="fav.name"
+          required
+        >
+        <button
+          class="btn btn-outline-danger input-group-text"
+          (click)="deleteFav(i)"
+        >
+          <i style="font-size: 1.25rem;" class="bi bi-trash"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col d-flex justify-content-end">
+      <button type="submit" class="btn btn-primary" [disabled]="myForm.invalid">
+        Guardar
+      </button>
+    </div>
+  </div>
+</form>
+
+<span>Persona</span>
+<pre>
+  {{ user | json }}
+</pre>

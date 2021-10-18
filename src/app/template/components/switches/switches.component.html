@@ -1,0 +1,94 @@
+<h2>Template: <small>Switches</small></h2>
+<hr>
+
+<form #myForm="ngForm">
+  <div class="row mb-3">
+    <label class="col-sm-3 col-form-label">Genero</label>
+    <div class="col-sm-9">
+      <div class="form-check mb-2">
+        <input
+          type="radio"
+          class="form-check-input"
+          name="gender"
+          value="M"
+          [(ngModel)]="user.gender"
+          id="male"
+          required
+        >
+        <label for="male" class="form-check-label">Masculino</label>
+      </div>
+      <div class="form-check">
+        <input
+          type="radio"
+          class="form-check-input"
+          name="gender"
+          value="F"
+          [(ngModel)]="user.gender"
+          id="female"
+          required
+        >
+        <label for="female" class="form-check-label">Femenino</label>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label class="col-sm-3 col-form-label">Swicth</label>
+    <div class="col-sm-9">
+      <div class="form-check form-switch mt-2">
+        <input
+          type="checkbox"
+          class="form-check-input"
+          id="give"
+          name="notif"
+          [(ngModel)]="user.notifiers"
+        >
+        <label for="give" class="form-check-label">Permitir</label>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label class="col-sm-3 col-form-label">CheckBox</label>
+    <div class="col-sm-9">
+      <div class="form-check">
+        <input
+          type="checkbox"
+          class="form-check-input"
+          id="accept"
+          name="terms"
+          [(ngModel)]="termsAndConditions"
+          required
+        >
+        <label for="accept" class="form-check-label">Aceptar terminos y condiciones</label>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col d-flex justify-content-end">
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled] = "myForm.invalid"
+      >Guardar</button>
+    </div>
+  </div>
+</form>
+
+<h4>Valor del formulario</h4>
+<pre>
+  {{ myForm.value | json }}
+</pre>
+<hr>
+<h4>Valor de la persona</h4>
+<pre>
+  {{ user | json }}
+</pre>
+<hr>
+<h4>Valido</h4>
+<pre>
+  {{ myForm.valid }}
+</pre>
+<hr>
+<h4>Terminos</h4>
+<pre>
+  {{ myForm.controls?.terms?.errors | json }}
+</pre>

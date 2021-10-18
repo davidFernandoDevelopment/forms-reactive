@@ -1,0 +1,56 @@
+<h2>Template: <small>Basics</small></h2>
+
+<div class="row">
+  <div class="col">
+    <form autocomplete="off" #myForm="ngForm" (ngSubmit)="saved()">
+      <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Producto</label>
+        <div class="col-sm-9">
+          <input name="name" [ngModel]="initForm.name" type="text" class="form-control"
+            placeholder="Nombre del producto" required minlength="3">
+          <span *ngIf="fieldState('name')" class="form-text text-danger">Debe ser de 3 letras</span>
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Precio</label>
+        <div class="col-sm-9">
+          <input name="price" [ngModel]="initForm.price" type="number" class="form-control" placeholder="Precio del producto"
+            required min="0">
+          <span *ngIf="fieldState('price')" class="form-text text-danger">El precio debe ser positivo</span>
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Existencias</label>
+        <div class="col-sm-9">
+          <input name="existence" [ngModel]="initForm.existence" type="number" class="form-control"
+            placeholder="Existencias del producto" customMin [minimo]="0" required>
+          <span class="form-text text-danger">Debe ser de 3 letras</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col d-flex justify-content-end">
+          <button type="submit" class="btn btn-primary" [disabled]="myForm.invalid">Guardar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <span>Valid</span>
+    <pre>{{ myForm.valid }}</pre>
+
+    <span>Pristine</span>
+    <pre>{{ myForm.pristine }}</pre>
+
+    <span>Touch</span>
+    <pre>{{ myForm.touched }}</pre>
+
+    <span>Value</span>
+    <pre>{{ myForm.value | json }}</pre>
+
+    <span>Existencias</span>
+    <pre>{{ myForm.controls?.existence?.errors | json }}</pre>
+  </div>
+</div>

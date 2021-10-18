@@ -1,0 +1,138 @@
+<h2>Template: <small>Dynamics</small></h2>
+<hr>
+
+<form
+  autocomplete="off"
+  [formGroup]="myForm"
+  (ngSubmit)="save()"
+>
+  <div class="row mb-3">
+    <label class="col-sm-3 col-form-label">Producto</label>
+    <div class="col-sm-9">
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Nombre del producto"
+          formControlName="name"
+        >
+        <i
+          style="color: green;font-size: 1.25rem;"
+          class="bi bi-check-circle input-group-text"
+          *ngIf="!myForm.controls.name.errors"
+        ></i>
+      </div>
+      <span
+        class="form-text text-danger"
+        *ngIf="fieldInvalid('name', 'required')"
+      >
+        El nombre es requerido
+      </span>
+      <span
+        class="form-text text-danger"
+        *ngIf="fieldInvalid('name', 'minlength', true)"
+      >
+        Use mas de 3 caracteres
+      </span>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label class="col-sm-3 col-form-label">Stock</label>
+    <div class="col-sm-9">
+      <div class="input-group">
+        <input
+          type="number"
+          class="form-control"
+          placeholder="Stock del producto"
+          formControlName="age"
+        >
+        <i
+          style="color: green;font-size: 1.25rem;"
+          class="bi bi-check-circle input-group-text"
+          *ngIf="!myForm.controls.age.errors"
+        ></i>
+      </div>
+      <span
+        class="form-text text-danger"
+        *ngIf="fieldInvalid('age', 'required')"
+      >
+        La edad es requerido
+      </span>
+      <span
+        class="form-text text-danger"
+        *ngIf="fieldInvalid('age', 'min')"
+      >
+        La edad debe ser > 0
+      </span>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label class="col-sm-3 col-form-label">Agregar Codigo</label>
+    <div class="col-sm-9">
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Agregar codigo"
+          [formControl]="newFavorite"
+          (keyup.enter)="addFavorite()"
+        >
+        <button
+          type="button"
+          class="btn btn-outline-primary input-group-text"
+          (click)="addFavorite()"
+        >
+          <i style="font-size: 1.25rem;" class="bi bi-plus-circle"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label class="col-sm-3 col-form-label">Codigos de barra</label>
+    <div
+      class="col-sm-9"
+      formArrayName="favorites"
+    >
+      <div
+        class="input-group mb-1"
+        *ngFor="let fav of favorites.controls; let i=index"
+      >
+        <input
+          type="text"
+          class="form-control"
+          [formControlName]="i"
+        >
+        <button
+          class="btn btn-outline-danger input-group-text"
+          (click)="deleteFavorite(i)"
+        >
+          <i style="font-size: 1.25rem;" class="bi bi-trash"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col d-flex justify-content-end">
+      <button type="submit" class="btn btn-primary">
+        Guardar
+      </button>
+    </div>
+  </div>
+</form>
+
+<span>Valid Form</span>
+<pre>
+  {{ myForm.valid  }}
+</pre>
+<span>Users</span>
+<pre>
+  {{ myForm.value | json }}
+</pre>
+<span>Agregar juego</span>
+<pre>
+  {{ newFavorite.value | json }}
+</pre>
+<span>Valid</span>
+<pre>
+  {{ newFavorite.valid | json }}
+</pre>

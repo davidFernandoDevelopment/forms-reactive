@@ -1,0 +1,91 @@
+<h2>Template: <small>Switches</small></h2>
+<hr>
+
+<form
+  [formGroup]="myForm"
+  (ngSubmit)="save()"
+>
+  <div class="row mb-3">
+    <label class="col-sm-3 col-form-label">Genero</label>
+    <div class="col-sm-9">
+      <div class="form-check mb-2">
+        <input
+          type="radio"
+          class="form-check-input"
+          name="gender"
+          value="M"
+          id="male"
+          formControlName="gender"
+        >
+        <label for="male" class="form-check-label">Masculino</label>
+      </div>
+      <div class="form-check">
+        <input
+          type="radio"
+          class="form-check-input"
+          name="gender"
+          value="F"
+          id="female"
+          formControlName="gender"
+        >
+        <label for="female" class="form-check-label">Femenino</label>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label class="col-sm-3 col-form-label">Swicth</label>
+    <div class="col-sm-9">
+      <div class="form-check form-switch mt-2">
+        <input
+          type="checkbox"
+          class="form-check-input"
+          id="give"
+          formControlName="notifications"
+        >
+        <label for="give" class="form-check-label">Permitir</label>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label class="col-sm-3 col-form-label">CheckBox</label>
+    <div class="col-sm-9">
+      <div class="form-check">
+        <input
+          type="checkbox"
+          class="form-check-input"
+          id="accept"
+          formControlName="termsAndConditions"
+        >
+        <label for="accept" class="form-check-label">Aceptar terminos y condiciones</label>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col d-flex justify-content-end">
+      <button
+        type="submit"
+        class="btn btn-primary"
+      >Guardar</button>
+    </div>
+  </div>
+</form>
+
+<h4>Valor del formulario: {{ myForm.valid }}</h4>
+<pre>
+  {{ myForm.value | json }}
+</pre>
+<hr>
+<h4>Valor de la persona</h4>
+<pre>
+  {{ user | json }}
+</pre>
+<!-- <hr>
+<h4>Valido</h4>
+<pre>
+  {{ myForm.valid }}
+</pre>
+<hr>
+<h4>Terminos</h4>
+<pre>
+  {{ myForm.controls?.terms?.errors | json }}
+</pre> -->
