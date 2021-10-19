@@ -1,0 +1,169 @@
+<h2>Validaciones reactivas</h2>
+<hr>
+
+<div class="row">
+  <div class="col">
+    <form
+      [formGroup]="myForm"
+      (ngSubmit)="save()"
+    >
+      <div class="row mb-3">
+          <label
+            class="col-form-label col-sm-3">
+            Nombre
+          </label>
+          <div class="col-sm-9">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Nombre del usuario"
+              formControlName="name"
+            >
+            <span
+            *ngIf="fieldInvalid('name', 'required')"
+            class="form-text text-danger"
+            >
+              Nombre y apellido requeridos
+            </span>
+            <span
+              *ngIf="fieldInvalid('name', 'pattern', true)"
+              class="form-text text-danger"
+            >
+              Debe de ser en formato de nombre y apellido
+            </span>
+          </div>
+      </div>
+      <div class="row mb-3">
+        <label
+          class="col-form-label col-sm-3">
+          Email
+        </label>
+        <div class="col-sm-9">
+          <div class="input-group">
+            <input
+              type="email"
+              class="form-control"
+              placeholder="Email del usuario"
+              formControlName="email"
+            >
+            <div class="input-group-text" *ngIf="myForm.pending">
+              <div class="spinner-border text-primary spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          </div>
+          <span
+          *ngIf="fieldInvalid('email', 'required')"
+          class="form-text text-danger"
+          >
+            El Email es obligatorio
+          </span>
+          <span
+          *ngIf="fieldInvalid('email', 'pattern', true)"
+          class="form-text text-danger"
+          >
+            Ingrese un email valido
+          </span>
+          <span
+          *ngIf="fieldInvalid('email', 'emailExists', true)"
+          class="form-text text-danger"
+          >
+            Este email ya existe, Elija otro !
+          </span>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label
+          class="col-form-label col-sm-3">
+          Username
+        </label>
+        <div class="col-sm-9">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Username del usuario"
+            formControlName="username"
+          >
+          <span
+          *ngIf="fieldInvalid('username', 'required')"
+          class="form-text text-danger"
+          >
+            El username es requerido
+          </span>
+          <span
+          *ngIf="fieldInvalid('username', 'default', true)"
+          class="form-text text-danger"
+          >
+            El username no puede ser default
+          </span>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label
+          class="col-form-label col-sm-3">
+          Password
+        </label>
+        <div class="col-sm-9">
+          <input
+            autocapitalize="off"
+            type="password"
+            class="form-control"
+            placeholder="Ingrese la contraseña"
+            formControlName="password"
+          >
+          <span
+          *ngIf="fieldInvalid('password', 'required')"
+          class="form-text text-danger"
+          >
+            La contraseña es requerido
+          </span>
+          <span
+          *ngIf="fieldInvalid('password', 'minlength', true)"
+          class="form-text text-danger"
+          >
+            La contraseña tiene que tener como minimo 6 caracteres
+          </span>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label
+          class="col-form-label col-sm-3">
+          Confirmar password
+        </label>
+        <div class="col-sm-9">
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Confirmar la contraseña"
+            formControlName="confirmPassword"
+          >
+          <span
+          *ngIf="fieldInvalid('confirmPassword', 'noEquals')"
+          class="form-text text-danger"
+          >
+            Las contraseñas deben ser iguales.
+          </span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col d-flex justify-content-end">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="myForm.pending"
+          >
+            Registrar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<span>Errors Formulario: {{ myForm.valid }} - {{ myForm.status }}</span>
+<pre>
+  {{ myForm.errors | json }}
+</pre>
+<p>
+  {{emailErrorMessage}}
+</p>

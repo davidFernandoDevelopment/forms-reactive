@@ -17,14 +17,18 @@ interface IMenuItem {
 export class SidemenuComponent implements OnInit {
 
   menuTemplate: IMenuItem[] = [
-    { text: 'Basicos', path: 'template/basics' },
-    { text: 'Dinámicos', path: 'template/dynamics' },
-    { text: 'Switches', path: 'template/switches' }
+    { text: 'Basicos', path: './template/basics' },
+    { text: 'Dinámicos', path: './template/dynamics' },
+    { text: 'Switches', path: './template/switches' }
   ];
   menuReactive: IMenuItem[] = [
-    { text: 'Basicos', path: 'reactive/basics' },
-    { text: 'Dinámicos', path: 'reactive/dynamics' },
-    { text: 'Switches', path: 'reactive/switches' }
+    { text: 'Basicos', path: './reactive/basics' },
+    { text: 'Dinámicos', path: './reactive/dynamics' },
+    { text: 'Switches', path: './reactive/switches' }
+  ];
+  menuAuth: IMenuItem[] = [
+    { text: 'Login', path: './auth/login' },
+    { text: 'Registro', path: './auth/register' }
   ];
 
   constructor() { }
